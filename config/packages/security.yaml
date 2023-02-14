@@ -1,0 +1,28 @@
+security:
+    # https://symfony.com/doc/current/security.html#c-hashing-passwords
+    password_hashers:
+        App\Entity\User: 'auto'
+
+    # https://symfony.com/doc/current/security/authenticator_manager.html
+    enable_authenticator_manager: true
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    providers:
+        # used to reload user from session & other features (e.g. switch_user)
+        users:
+            entity:
+                class: App\Entity\User
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/_(profiler|wdt)
+            security: false
+        main:
+            access_token:
+                token_handler: App\Security\AccessTokenHandler
+                token_extractors:
+                    - 'header'
+                    - 'App\Security\CustomTokenExtractor'
+    # disallow access to all api endpoints except swagger
+    access_control:
+        - { path: ^/api/, roles: ROLE_ADMIN }
