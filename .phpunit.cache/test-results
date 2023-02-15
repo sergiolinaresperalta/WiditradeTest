@@ -1,0 +1,1 @@
+{"version":1,"defects":[],"times":{"App\\Tests\\ShortUrlsTest::testCreateShortUrlWithoutToken":3.769,"App\\Tests\\ShortUrlsTest::testCreateShortUrlWithWrongBearerAuthorization":0.012,"App\\Tests\\ShortUrlsTest::testCreateShortUrlWithBearerAuthorization":1.656}}

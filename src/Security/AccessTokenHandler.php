@@ -9,6 +9,6 @@ class AccessTokenHandler implements AccessTokenHandlerInterface
 
     public function getUserBadgeFrom(string $accessToken): UserBadge
     {
-        return new UserBadge('sergiolinaresperalta@gmail.com');
+        return new UserBadge('admin-email@example.com');
     }
 }

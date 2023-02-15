@@ -25,4 +25,4 @@ security:
                     - 'App\Security\CustomTokenExtractor'
     # disallow access to all api endpoints except swagger
     access_control:
-        - { path: ^/api/, roles: ROLE_ADMIN }
+        - { path: ^/api/docs, roles: PUBLIC_ACCESS }

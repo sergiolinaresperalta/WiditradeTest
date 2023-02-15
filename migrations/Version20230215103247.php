@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230214131424 extends AbstractMigration
+final class Version20230215103247 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -23,7 +23,7 @@ final class Version20230214131424 extends AbstractMigration
         $this->addSql('
             INSERT INTO `user` (`email`, `roles`, `password`)
             VALUES
-                (\'sergiolinaresperalta@gmail.com\', \'["ROLE_ADMIN"]\', \'$2y$13$b1lQmZzHPTI7JAFDjmMaK.CG6fz6WYy5yNyi50RMBdI4o6zS.iZAq\');
+                (\'admin-email@example.com\', \'["ROLE_ADMIN"]\', \'$2y$13$b1lQmZzHPTI7JAFDjmMaK.CG6fz6WYy5yNyi50RMBdI4o6zS.iZAq\');
             '
         );
     }
@@ -31,6 +31,6 @@ final class Version20230214131424 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DELETE FROM `user` WHERE `email` = \'sergiolinaresperalta@gmail.com\';');
+        $this->addSql('DELETE FROM `user` WHERE `email` = \'admin-email@example.com\';');
     }
 }

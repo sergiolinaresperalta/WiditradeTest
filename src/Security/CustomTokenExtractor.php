@@ -4,12 +4,17 @@ namespace App\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Http\AccessToken\AccessTokenExtractorInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+use App\Service\TokenService;
 
 class CustomTokenExtractor implements AccessTokenExtractorInterface
 {
 
     public function extractAccessToken(Request $request): ?string
     {
+        if (false === strpos($request->getRequestUri(), '/v1')) {
+            return null;
+        }
+        
         $token = $request->headers->get('Authorization');
         if (null === $token) {
             throw new AccessDeniedHttpException('No token provided');
@@ -20,34 +25,14 @@ class CustomTokenExtractor implements AccessTokenExtractorInterface
         }
 
         $token = substr($token, 7);
-        if ($this->isValid($token)) {
+
+        $tokenService = new TokenService();
+
+        if ($tokenService->isValid($token)) {
             return $token;
         }
 
         throw new AccessDeniedHttpException('Invalid token');
-    }
-
-    public function isValid($string) : bool
-    {
-        $stack = [];
-        $open = ['{', '[', '('];
-        $close = ['}', ']', ')'];
-        
-        if (preg_match('/[^{}[\]()]/', $string)) {
-            return false;
-        }
-
-        for ($i = 0; $i < strlen($string); $i++) {
-            if (in_array($string[$i], $open)) {
-                $stack[] = $string[$i];
-            } else if (in_array($string[$i], $close)) {
-                $last = array_pop($stack);
-                if ($last != $open[array_search($string[$i], $close)]) {
-                    return false;
-                }
-            }
-        }
-        return count($stack) == 0;
     }
 
 }
