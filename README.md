@@ -2,6 +2,8 @@
 
 ## Installation
 
-- Use docker-compose to build and run the application.
-- Create the testapp database with the migration command.
-- Run the command `php bin/console doctrine:migrations:migrate` to create the tables.
+- Clone the repository.
+- Run `docker-compose build` to build the docker image.
+- Run `docker-compose up -d` to start the containers.
+- Run `php bin/console doctrine:database:create` inside the docker console to create the database.
+- Run the command `php bin/console doctrine:migrations:migrate` inside the docker console to create the tables.
